@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -70,13 +72,75 @@ fun GreetingPreview() {
     }
 }
 
+@Preview(showBackground = true, heightDp = 800, widthDp = 380)
+@Composable
+fun page(): Unit {
+    Column (modifier = Modifier
+        .fillMaxWidth()
+        .padding(12.dp)) {
+        Cabecalho()
+        dataNome("Rodrigo")
+        imagemCentral()
+    }
+}
+
+
+@Preview(showBackground = true, heightDp = 350, widthDp = 380)
+@Composable
+fun imagemCentral(): Unit {
+    Box(modifier = Modifier
+        .height(300.dp)
+        .background(Color.Transparent)
+        .fillMaxWidth()
+    ){
+    Column {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp),
+            contentAlignment = Alignment.TopCenter
+        ){
+        Image(painter = painterResource(id = R.drawable.sun),
+            contentDescription = "sol")
+        }
+
+        Row (verticalAlignment = Alignment.Bottom,
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+
+            ){
+            Text(text ="12°C",
+                fontWeight = FontWeight.Bold,
+                fontSize = TextUnit(55f, TextUnitType.Sp),
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Text(text = "Parcialmente nublado",
+                fontWeight = FontWeight.Bold,
+                fontSize = TextUnit(15f, TextUnitType.Sp),
+                color = MaterialTheme.colorScheme.tertiary
+            )
+
+        }
+
+    }
+}
+
+
+}
+
+
+
+
 @Preview(showBackground = true, heightDp = 50, widthDp = 380)
 @Composable
 fun Cabecalho(): Unit {
     Row (
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(5.dp)
+        modifier = Modifier
+            .padding(0.dp, 8.dp)
+            .fillMaxWidth()
 
         ){
         Button(
@@ -118,8 +182,6 @@ fun Cabecalho(): Unit {
 
 
     }
-
-
 
 
 
