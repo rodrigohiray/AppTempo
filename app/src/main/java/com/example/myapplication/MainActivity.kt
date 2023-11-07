@@ -16,6 +16,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -49,12 +52,57 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    mainPage()
                 }
             }
         }
     }
 }
+
+var infoSeteDias = listOf(
+    temperaturaDia(
+        temperatura = 21,
+        estado = "Frio demais",
+        resource = R.drawable.sun
+    ),
+    temperaturaDia(
+        temperatura = 14,
+        estado = "Frio demais",
+        resource = R.drawable.cloudy
+    ),
+    temperaturaDia(
+        temperatura = 8,
+        estado = "Frio demais",
+        resource = R.drawable.storm
+    ),
+
+    temperaturaDia(
+        temperatura = 18,
+        estado = "Ensoladaro",
+        resource = R.drawable.sun
+    ),
+
+    temperaturaDia(
+        temperatura = 14,
+        estado = "Chuvoso",
+        resource = R.drawable.rainy
+    ),
+
+    temperaturaDia(
+        temperatura = 25,
+        estado = "Frio demais",
+        resource = R.drawable.sun
+    ),
+
+    temperaturaDia(
+        temperatura = 25,
+        estado = "Frio demais",
+        resource = R.drawable.sun
+    )
+
+)
+
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -74,7 +122,7 @@ fun GreetingPreview() {
 
 @Preview(showBackground = true, heightDp = 800, widthDp = 380)
 @Composable
-fun page(): Unit {
+fun mainPage(): Unit {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,11 +131,37 @@ fun page(): Unit {
         Cabecalho()
         dataNome("Rodrigo")
         imagemCentral()
+        proximosSeteDias()
     }
 }
 
 
 @Preview(showBackground = true, heightDp = 350, widthDp = 380)
+@Composable
+fun proximosSeteDias() {
+    LazyRow(){
+        items(infoSeteDias){
+        proximoDia(it)
+        }
+    }
+}
+
+@Composable
+fun proximoDia(temperaturaDia: temperaturaDia): Unit {
+    Column (
+        modifier = Modifier
+            .width(100.dp)
+            .padding(15.dp, 15.dp, 15.dp, 15.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        Image(painter = painterResource(id = temperaturaDia.resource),
+            contentDescription = temperaturaDia.estado)
+        Text(text = temperaturaDia.temperatura.toString())
+        Text(text = temperaturaDia.estado)
+    }
+}
+
+//@Preview(showBackground = true, heightDp = 350, widthDp = 380)
 @Composable
 fun imagemCentral(): Unit {
     Box(
@@ -146,7 +220,7 @@ fun imagemCentral(): Unit {
 }
 
 
-@Preview(showBackground = true, heightDp = 50, widthDp = 380)
+//@Preview(showBackground = true, heightDp = 50, widthDp = 380)
 @Composable
 fun Cabecalho(): Unit {
     Row(
@@ -198,7 +272,7 @@ fun Cabecalho(): Unit {
 }
 
 
-@Preview(showBackground = true, widthDp = 380)
+//@Preview(showBackground = true, widthDp = 380)
 @Composable
 fun dataNome(nome: String = "Rodrigo"): Unit {
     Column(modifier = Modifier.fillMaxWidth()) {
