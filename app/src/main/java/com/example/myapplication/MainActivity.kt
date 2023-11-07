@@ -75,9 +75,11 @@ fun GreetingPreview() {
 @Preview(showBackground = true, heightDp = 800, widthDp = 380)
 @Composable
 fun page(): Unit {
-    Column (modifier = Modifier
-        .fillMaxWidth()
-        .padding(12.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+    ) {
         Cabecalho()
         dataNome("Rodrigo")
         imagemCentral()
@@ -88,61 +90,73 @@ fun page(): Unit {
 @Preview(showBackground = true, heightDp = 350, widthDp = 380)
 @Composable
 fun imagemCentral(): Unit {
-    Box(modifier = Modifier
-        .height(300.dp)
-        .background(Color.Transparent)
-        .fillMaxWidth()
-    ){
-    Column {
+    Box(
+        modifier = Modifier
+            .height(300.dp)
+            .background(Color.Transparent)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+
+    ) {
+
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(15.dp),
-            contentAlignment = Alignment.TopCenter
-        ){
-        Image(painter = painterResource(id = R.drawable.sun),
-            contentDescription = "sol")
+                .clip(CircleShape)
+                .background(Color.White)
+                .size(280.dp)
+        ) {
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp),
+                contentAlignment = Alignment.TopCenter
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.sun),
+                    contentDescription = "sol"
+                )
+            }
+
+            Row(
+                verticalAlignment = Alignment.Bottom,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(0.dp, 180.dp, 0.dp, 0.dp),
+                horizontalArrangement = Arrangement.Center
+
+            ) {
+                Text(
+                    text = "12°C",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = TextUnit(45f, TextUnitType.Sp),
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                Text(
+                    text = "Parcialmente nublado",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = TextUnit(10f, TextUnitType.Sp),
+                    color = MaterialTheme.colorScheme.tertiary
+                )
+
+            }
         }
-
-        Row (verticalAlignment = Alignment.Bottom,
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-
-            ){
-            Text(text ="12°C",
-                fontWeight = FontWeight.Bold,
-                fontSize = TextUnit(55f, TextUnitType.Sp),
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Text(text = "Parcialmente nublado",
-                fontWeight = FontWeight.Bold,
-                fontSize = TextUnit(15f, TextUnitType.Sp),
-                color = MaterialTheme.colorScheme.tertiary
-            )
-
-        }
-
     }
 }
-
-
-}
-
-
 
 
 @Preview(showBackground = true, heightDp = 50, widthDp = 380)
 @Composable
 fun Cabecalho(): Unit {
-    Row (
+    Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(0.dp, 8.dp)
             .fillMaxWidth()
 
-        ){
+    ) {
         Button(
             onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
@@ -152,9 +166,11 @@ fun Cabecalho(): Unit {
                 .clip(CircleShape)
 
 
-            ) {
-            Image(painter = painterResource(id = R.drawable.search),
-                contentDescription = R.string.Menu_Search.toString())
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.search),
+                contentDescription = R.string.Menu_Search.toString()
+            )
         }
 
 
@@ -168,51 +184,52 @@ fun Cabecalho(): Unit {
 
         ) {
 
-                Image(painter = painterResource(id = R.drawable.foto),
-                    contentDescription = R.string.Menu_foto.toString())
-
-            }
-
-
+            Image(
+                painter = painterResource(id = R.drawable.foto),
+                contentDescription = R.string.Menu_foto.toString()
+            )
 
         }
-
-
-
 
 
     }
 
 
+}
+
 
 @Preview(showBackground = true, widthDp = 380)
 @Composable
-fun dataNome(nome:String="Rodrigo"): Unit {
-    Column (modifier = Modifier.fillMaxWidth()){
-        Row (modifier = Modifier.fillMaxWidth()){
-            Text(text = "Olá",
+fun dataNome(nome: String = "Rodrigo"): Unit {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "Olá",
                 modifier = Modifier.padding(end = 2.dp),
                 fontSize = TextUnit(25f, TextUnitType.Sp)
             )
-            Text(text = "$nome",
+            Text(
+                text = "$nome",
                 fontWeight = FontWeight.Bold,
                 fontSize = TextUnit(25f, TextUnitType.Sp),
                 color = MaterialTheme.colorScheme.primary
 
             )
         }
-            Text(text = formatData(Calendar.getInstance().time),
-                fontWeight = FontWeight.Light,
-                fontSize = TextUnit(18f, TextUnitType.Sp),
-                color = MaterialTheme.colorScheme.secondary
+        Text(
+            text = formatData(Calendar.getInstance().time),
+            fontWeight = FontWeight.Light,
+            fontSize = TextUnit(18f, TextUnitType.Sp),
+            color = MaterialTheme.colorScheme.secondary
 
 
-            )
-            Text(text = "Póvoa de Santa Iria",
-                fontWeight = FontWeight.Light,
-                fontSize = TextUnit(18f, TextUnitType.Sp),
-                color = MaterialTheme.colorScheme.secondary
-            )
+        )
+        Text(
+            text = "Póvoa de Santa Iria",
+            fontWeight = FontWeight.Light,
+            fontSize = TextUnit(18f, TextUnitType.Sp),
+            color = MaterialTheme.colorScheme.secondary
+        )
     }
 }
 
